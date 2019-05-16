@@ -1,3 +1,4 @@
+import sys
 import os
 import glob
 
@@ -5,10 +6,14 @@ from caption import caption
 from collectcv import collectcv
 
 if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("incluir desc, por exemplo, 0.06")
+        exit()
     DIRNAME = "c:/Users/Heitor/Desktop/code/imagecaption/original/"
     TARGET_DIRNAME = "c:/Users/Heitor/Desktop/code/imagecaption/anotado/"
     os.chdir(DIRNAME)
-    cods = collectcv(desc="0.06")
+    cods = collectcv(desc=str(sys.argv[1]))
+    errors = ""
     for fname in glob.glob('**/*.jpg'):
         fname = fname.replace('\\', '/')
         cod = fname.split("/")[-1].split(".")[0].upper()
@@ -16,6 +21,8 @@ if __name__ == "__main__":
 
         folder = fname.split('/')[0]
 
+        print(fname)
+        
         try:
             os.mkdir(TARGET_DIRNAME + folder)
         except FileExistsError:
@@ -24,5 +31,9 @@ if __name__ == "__main__":
         try:
             caption(DIRNAME + fname, cods[cod])
         except KeyError:
-            print("Codigo para", cod, "nao existe")
+            errors += "CV de " + cod + " nao existe\n"
         
+
+    print()
+    print(errors)
+    
