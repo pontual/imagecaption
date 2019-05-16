@@ -1,0 +1,13 @@
+*.JPG
+*.jpg
+*.Jpg
+*.XLS
+*.xls
+*.Xls
+*.csv
+*.CSV
+*.ttf
+__pycache__/
+*.zip
+*.ZIP
+*.db
