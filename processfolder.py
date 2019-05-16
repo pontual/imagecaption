@@ -20,8 +20,6 @@ if __name__ == "__main__":
         # try creating anotado folder
 
         folder = fname.split('/')[0]
-
-        print(fname)
         
         try:
             os.mkdir(TARGET_DIRNAME + folder)
@@ -29,7 +27,9 @@ if __name__ == "__main__":
             pass
 
         try:
-            caption(DIRNAME + fname, cods[cod])
+            caption(DIRNAME + fname, cods[cod][1])
+            print(fname, cods[cod][0])
+
         except KeyError:
             errors += "CV de " + cod + " nao existe\n"
         
